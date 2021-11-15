@@ -1,7 +1,7 @@
 <aside class="main-sidebar elevation-4 sidebar-light-success">
     <!-- Brand Logo -->
     <a href="dashboard" class="brand-link">
-        <img src="public/views/resources/img/mrms-logo.png" alt="MRMS-logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="public/views/resources/img/sidebar-logo.png" alt="STW-logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-bolder">MRMS-Web</span>
     </a>
 

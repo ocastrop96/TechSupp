@@ -2,10 +2,10 @@
     <div class="login-box">
         <div class="card card-outline card-info">
             <div class="login-logo">
-                <img src="public/views/resources/img/mrms-logo.png" class="img-responsive" style="padding:10px 50px 0px 50px">
+                <img src="public/views/resources/img/techsupp-logo.png" class="img-responsive" style="padding:15px 50px 0px 50px">
             </div>
             <div class="card-body">
-                <p class="login-box-msg font-weight-bold h5 text-secondary">Sistema de Gestión de Descansos Médicos - HNSEB <br><span class="font-italic h6">v.2021.09.01</span></p>
+                <p class="login-box-msg font-weight-bold h5 text-secondary">Sistema de Soporte Técnico Informático - HNSEB <br><span class="font-italic h6">v.2022.01.05</span></p>
                 <form action="" method="post" id="frmLoginQS">
                     <div id="mensajeLogMR" class="d-none">
                         <div class="alert alert-danger alert-dismissible">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="row">
                         <div class="col-8 ml-5">
-                            <button type="submit" class="btn btn-info btn-block btn-flat rounded" id="btnLoginMR"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
+                            <button type="submit" class="btn btn-info btn-block btn-flat rounded" id="btnLoginSTW"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>
                         </div>
                     </div>
                     <?php

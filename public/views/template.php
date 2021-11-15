@@ -7,9 +7,9 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" type="image/x-icon" href="public/views/resources/img/mrms-icon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="public/views/resources/img/techsupp-icono.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sistema de Gestión de Licencias | MRMS-HNSEB</title>
+    <title>Sistema de Soporte Técnico Informático | TechSupp-HNSEB</title>
     <!-- CSS -->
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap">
@@ -85,7 +85,7 @@ session_start();
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <?php
-    if (isset($_SESSION["loginMRSystem"]) && $_SESSION["loginMRSystem"] == "ok") {
+    if (isset($_SESSION["loginSTWSystem"]) && $_SESSION["loginSTWSystem"] == "ok") {
         echo '<div class="wrapper">';
         include('pages/header.php');
         include('pages/menu.php');
@@ -118,7 +118,7 @@ session_start();
     ?>
     <!-- Scripts JS Propios -->
     <script type="text/javascript" src="public/js/main.js"></script>
-    <script type="text/javascript" src="public/js/dashboard.js"></script>
+    <!-- <script type="text/javascript" src="public/js/dashboard.js"></script>
     <script type="text/javascript" src="public/js/signin.js"></script>
     <script type="text/javascript" src="public/js/usuarios.js"></script>
     <script type="text/javascript" src="public/js/empleados.js"></script>
@@ -126,7 +126,7 @@ session_start();
     <script type="text/javascript" src="public/js/licencias.js"></script>
     <script type="text/javascript" src="public/js/reporte-empleado.js"></script>
     <script type="text/javascript" src="public/js/reporte-coordinador.js"></script>
-    <script type="text/javascript" src="public/js/salud-ocupacional.js"></script>
+    <script type="text/javascript" src="public/js/salud-ocupacional.js"></script> -->
     <!-- Scripts JS Propios -->
 </body>
 
