@@ -12,7 +12,7 @@ session_start();
     <title>Sistema de Soporte Técnico Informático | TechSupp-HNSEB</title>
     <!-- CSS -->
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,300;0,400;0,700;1,400&display=swap">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="public/views/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -93,14 +93,6 @@ session_start();
         if (isset($_GET["ruta"])) {
             if (
                 $_GET["ruta"] == "dashboard" ||
-                $_GET["ruta"] == "usuarios" ||
-                $_GET["ruta"] == "empleados" ||
-                $_GET["ruta"] == "cargos" ||
-                $_GET["ruta"] == "licencias" ||
-                $_GET["ruta"] == "salud-ocupacional" ||
-                $_GET["ruta"] == "reporte-empleado" ||
-                $_GET["ruta"] == "reporte-coordinador" ||
-                $_GET["ruta"] == "reporte-responsable" ||
                 $_GET["ruta"] == "signout"
             ) {
                 include "pages/" . $_GET["ruta"] . ".php";
@@ -118,15 +110,7 @@ session_start();
     ?>
     <!-- Scripts JS Propios -->
     <script type="text/javascript" src="public/js/main.js"></script>
-    <!-- <script type="text/javascript" src="public/js/dashboard.js"></script>
     <script type="text/javascript" src="public/js/signin.js"></script>
-    <script type="text/javascript" src="public/js/usuarios.js"></script>
-    <script type="text/javascript" src="public/js/empleados.js"></script>
-    <script type="text/javascript" src="public/js/cargos.js"></script>
-    <script type="text/javascript" src="public/js/licencias.js"></script>
-    <script type="text/javascript" src="public/js/reporte-empleado.js"></script>
-    <script type="text/javascript" src="public/js/reporte-coordinador.js"></script>
-    <script type="text/javascript" src="public/js/salud-ocupacional.js"></script> -->
     <!-- Scripts JS Propios -->
 </body>
 

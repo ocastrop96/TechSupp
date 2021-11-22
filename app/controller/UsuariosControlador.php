@@ -3,31 +3,31 @@ class UsuariosControlador
 {
     static public function ctrLoginUsuario()
     {
-        if (isset($_POST["usuarioLogMR"]) && isset($_POST["usuarioPassMR"])) {
+        if (isset($_POST["usuarioLogSTW"]) && isset($_POST["usuarioPassSTW"])) {
             if (
-                preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/', $_POST["usuarioLogMR"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ].{7,15}+$/', $_POST["usuarioPassMR"])
+                preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/', $_POST["usuarioLogSTW"]) &&
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ].{7,15}+$/', $_POST["usuarioPassSTW"])
             ) {
-                $usuario = $_POST["usuarioLogMR"];
-                $encriptaPass = crypt($_POST["usuarioPassMR"], '$2a$07$usesomesillystringforsalt$');
+                $usuario = $_POST["usuarioLogSTW"];
+                $encriptaPass = crypt($_POST["usuarioPassSTW"], '$2a$07$usesomesillystringforsalt$');
 
                 $rptLogin = UsuariosModelo::mdlLoginUsuario($usuario);
-                if ($rptLogin["cuenta"] == $_POST["usuarioLogMR"] && $rptLogin["clave"] == $encriptaPass) {
+                if ($rptLogin["cuenta"] == $_POST["usuarioLogSTW"] && $rptLogin["clave"] == $encriptaPass) {
                     // Validación de habilitación
                     if ($rptLogin["estado"] == 1) {
                         // VALIDANDO INTENTOS REGISTRADOS
-                        if ($rptLogin["intentos"] <= 3) {
-                            $_SESSION["loginMRSystem"] = "ok";
-                            $_SESSION["loginIdMR"] = $rptLogin["idUsuario"];
-                            $_SESSION["loginCardMR"] = $rptLogin["dni"];
-                            $_SESSION["loginPerfilMR"] = $rptLogin["perfil"];
-                            $_SESSION["loginPerfilDescMR"] = $rptLogin["descPerfil"];
-                            $_SESSION["loginNombresMR"] = $rptLogin["nombres"];
+                        if ($rptLogin["nintentos"] <= 3) {
+                            $_SESSION["loginSTWSystem"] = "ok";
+                            $_SESSION["loginIdSTW"] = $rptLogin["id_usuario"];
+                            $_SESSION["loginCardSTW"] = $rptLogin["dni"];
+                            $_SESSION["loginPerfilSTW"] = $rptLogin["id_perfil"];
+                            $_SESSION["loginPerfilDescSTW"] = $rptLogin["perfil"];
+                            $_SESSION["loginNombresSTW"] = $rptLogin["nombres"];
 
                             echo '<script>
                                 Swal.fire({
                                     icon: "success",
-                                    title: "Acceso concedido...¡Bienvenido(a)! <br>' . $_SESSION["loginNombresMR"] . '",
+                                    title: "Acceso concedido...¡Bienvenido(a)! <br>' . $_SESSION["loginNombresSTW"] . '",
                                     showConfirmButton: false,
                                     timer: 1500
                                 });

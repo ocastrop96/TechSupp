@@ -13,7 +13,7 @@ class UsuariosModelo
     }
     static public function mdlRegistroIntentos($datos)
     {
-        $stmt = Conexion::conectar()->prepare("CALL RegistrarIntentos(:idUsuario)");
+        $stmt = Conexion::conectar()->prepare("CALL RegistroIntentos(:idUsuario)");
         $stmt->bindParam(":idUsuario", $datos, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch();
@@ -24,34 +24,29 @@ class UsuariosModelo
     {
         if ($item != null) {
             $stmt = Conexion::conectar()->prepare("SELECT
-            mrms_usuarios.idUsuario, 
-            mrms_usuarios.perfil, 
-            mrms_perfil.descPerfil, 
-            mrms_usuarios.estado, 
-            mrms_estusuario.descEstadoUs, 
-            mrms_usuarios.dni, 
-            mrms_usuarios.nombres, 
-            mrms_usuarios.apellidos, 
-            mrms_usuarios.cuenta, 
-            mrms_usuarios.correo, 
-            mrms_usuarios.clave
+            ws_usuarios.id_usuario,
+            ws_usuarios.dni,
+            ws_usuarios.nombres,
+            ws_usuarios.apellido_paterno,
+            ws_usuarios.apellido_materno,
+            ws_usuarios.cuenta,
+            ws_usuarios.clave,
+            date_format(fecha_registro,'%d-%m-%Y') as fecha_registro,
+            ws_usuarios.nintentos,
+            ws_usuarios.id_perfil,
+            ws_perfiles.perfil,
+            ws_usuarios.estado,
+            ws_estadousuario.descripEstadoUs 
         FROM
-            mrms_usuarios
-            INNER JOIN
-            mrms_perfil
-            ON 
-                mrms_usuarios.perfil = mrms_perfil.idPerfil
-            INNER JOIN
-            mrms_estusuario
-            ON 
-                mrms_usuarios.estado = mrms_estusuario.idEstadoUs
-        WHERE $item = :$item 
-            ORDER BY mrms_usuarios.perfil ASC");
+            ws_usuarios
+            INNER JOIN ws_perfiles ON ws_usuarios.id_perfil = ws_perfiles.id_perfil
+            INNER JOIN ws_estadousuario ON ws_usuarios.estado = ws_estadousuario.idEstadoUs
+        WHERE $item = :$item");
             $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
             $stmt->execute();
             return $stmt->fetch();
         } else {
-            $stmt = Conexion::conectar()->prepare("CALL Listar_Usuarios()");
+            $stmt = Conexion::conectar()->prepare("CALL ListarUsuarios()");
             $stmt->execute();
             return $stmt->fetchAll();
         }

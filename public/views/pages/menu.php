@@ -1,17 +1,17 @@
-<aside class="main-sidebar elevation-4 sidebar-light-success">
+<aside class="main-sidebar elevation-4 sidebar-light-lightblue">
     <!-- Brand Logo -->
     <a href="dashboard" class="brand-link">
         <img src="public/views/resources/img/sidebar-logo.png" alt="STW-logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-bolder">MRMS-Web</span>
+        <span class="brand-text font-weight-bolder">TechSupp-Web</span>
     </a>
 
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="public/views/resources/img/sidebar-logo.jpg" class="img-circle elevation-2" alt="LOGIN MRMS">
+                <img src="public/views/resources/img/user-profile.png" class="img-circle elevation-2" alt="LOGIN STW">
             </div>
             <div class="info">
-                <a href="dashboard" class="d-block font-weight-bolder">Hola! <br><?php echo $_SESSION["loginNombresMR"]; ?></a>
+                <a href="dashboard" class="d-block font-weight-bolder">Hola! <br><?php echo $_SESSION["loginNombresSTW"]; ?></a>
             </div>
         </div>
 
@@ -25,215 +25,179 @@
                         </p>
                     </a>
                 </li>
-
-                <!-- Bloque de opciones de menú por usuario -->
                 <?php
-                if ($_SESSION["loginPerfilMR"] == 1) {
-                    echo '<li class="nav-header">Administración</li>
+                if ($_SESSION["loginPerfilSTW"] == 1 || $_SESSION["loginPerfilSTW"] == 2 || $_SESSION["loginPerfilSTW"] == 3) {
+                    echo '<li class="nav-header font-weight-bold">ADMINISTRACIÓN</li>
                     <li class="nav-item">
                         <a href="usuarios" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                Usuarios
-                            </p>
+                            <i class="fas fa-users nav-icon"></i>
+                            <p>Usuarios</p>
                         </a>
                     </li>
-                    <li class="nav-header">Personal</li>
                     <li class="nav-item">
-                        <a href="empleados" class="nav-link">
-                            <i class="nav-icon fas fa-people-carry"></i>
+                        <a href="oficinas" class="nav-link">
+                            <i class="nav-icon fas fa-sitemap"></i>
                             <p>
-                                Empleados
+                                Oficinas/Dept
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="cargos" class="nav-link">
-                            <i class="nav-icon fas fa-business-time"></i>
+                        <a href="servicios" class="nav-link">
+                            <i class="nav-icon fas fa-building"></i>
                             <p>
-                                Cargos
-                            </p>
-                        </a>
-                    </li>
-    
-                    <li class="nav-header">Gestión</li>
-                    <li class="nav-item">
-                        <a href="licencias" class="nav-link">
-                            <i class="nav-icon fas fa-file-invoice"></i>
-                            <p>
-                                Licencias
+                                Servicios
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="salud-ocupacional" class="nav-link">
-                            <i class="nav-icon fas fa-user-md"></i>
-                            <p>
-                                Salud Ocupacional
-                            </p>
+                        <a href="responsables" class="nav-link">
+                            <i class="nav-icon fas fa-users nav-icon"></i>
+                            <p>Responsables</p>
                         </a>
                     </li>
-                    <li class="nav-header">Reportes</li>
+                    <li class="nav-header font-weight-bold">COMPLEMENTOS</li>
                     <li class="nav-item">
-                        <a href="reporte-empleado" class="nav-link">
-                            <i class="nav-icon fas fa-chart-pie"></i>
-                            <p>
-                                Empleado
-                            </p>
+                        <a href="categorias" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>Categorías</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="reporte-coordinador" class="nav-link">
-                            <i class="nav-icon fas fa-chart-line"></i>
-                            <p>
-                                Coordinador
-                            </p>
-                        </a>
-                    </li>';
-                } elseif ($_SESSION["loginPerfilMR"] == 2) {
-                    echo '<li class="nav-header">Personal</li>
-                    <li class="nav-item">
-                        <a href="empleados" class="nav-link">
-                            <i class="nav-icon fas fa-people-carry"></i>
-                            <p>
-                                Empleados
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-header">Gestión</li>
-                    <li class="nav-item">
-                        <a href="licencias" class="nav-link">
-                            <i class="nav-icon fas fa-file-invoice"></i>
-                            <p>
-                                Licencias
-                            </p>
+                        <a href="diagnosticos" class="nav-link">
+                            <i class="nav-icon fas fa-laptop-medical"></i>
+                            <p>Diágnosticos</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="salud-ocupacional" class="nav-link">
-                            <i class="nav-icon fas fa-user-md"></i>
-                            <p>
-                                Salud Ocupacional
-                            </p>
+                        <a href="acciones" class="nav-link">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p>Acciones Realizadas</p>
                         </a>
                     </li>
-                    <li class="nav-header">Reportes</li>
+                    <li class="nav-header font-weight-bold">INVENTARIO</li>
                     <li class="nav-item">
-                        <a href="reporte-empleado" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
-                        <p>
-                            Empleado
-                        </p>
+                        <a href="equipos-computo" class="nav-link">
+                            <i class="nav-icon fas fa-laptop"></i>
+                            <p>Computadoras</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="reporte-coordinador" class="nav-link">
-                            <i class="nav-icon fas fa-chart-line"></i>
-                            <p>
-                                Coordinador
-                            </p>
-                        </a>
-                    </li>';
-                } elseif ($_SESSION["loginPerfilMR"] == 4) {
-                    echo '<li class="nav-header">Gestión</li>
-                    <li class="nav-item">
-                        <a href="licencias" class="nav-link">
-                            <i class="nav-icon fas fa-file-invoice"></i>
-                            <p>
-                                Licencias
-                            </p>
+                        <a href="equipos-otros" class="nav-link">
+                            <i class="nav-icon fas fa-keyboard"></i>
+                            <p>Périfericos</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="salud-ocupacional" class="nav-link">
-                            <i class="nav-icon fas fa-user-md"></i>
-                            <p>
-                                Salud Ocupacional
-                            </p>
+                        <a href="equipos-redes" class="nav-link">
+                            <i class="nav-icon fas fa-network-wired"></i>
+                            <p>Redes</p>
                         </a>
                     </li>
-                    <li class="nav-header">Reportes</li>
+
+                    <li class="nav-header font-weight-bold">INTEGRACIÓN</li>
                     <li class="nav-item">
-                        <a href="reporte-empleado" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
-                        <p>
-                            Empleado
-                        </p>
-                        </a>
-                    </li>';
-                } else {
-                    echo '<li class="nav-header">Personal</li>
-                    <li class="nav-item">
-                        <a href="empleados" class="nav-link">
-                            <i class="nav-icon fas fa-people-carry"></i>
-                            <p>
-                                Empleados
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-header">Gestión</li>
-                    <li class="nav-item">
-                        <a href="licencias" class="nav-link">
-                            <i class="nav-icon fas fa-file-invoice"></i>
-                            <p>
-                                Licencias
-                            </p>
+                        <a href="integracion-ec" class="nav-link">
+                            <i class="nav-icon fas fa-desktop"></i>
+                            <p>PC/Laptop/Servidor</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="salud-ocupacional" class="nav-link">
-                            <i class="nav-icon fas fa-user-md"></i>
-                            <p>
-                                Salud Ocupacional
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-header">Reportes</li>
-                    <li class="nav-item">
-                        <a href="reporte-empleado" class="nav-link">
-                            <i class="nav-icon fas fa-chart-pie"></i>
-                            <p>
-                                Empleado
-                            </p>
+                        <a href="integracion-ep" class="nav-link">
+                            <i class="nav-icon fas fa-print"></i>
+                            <p>Impresoras y Otros</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="reporte-coordinador" class="nav-link">
-                            <i class="nav-icon fas fa-chart-line"></i>
-                            <p>
-                                Coordinador
-                            </p>
+                        <a href="integracion-er" class="nav-link">
+                            <i class="nav-icon fas fa-server"></i>
+                            <p>Redes</p>
+                        </a>
+                    </li>
+                    <li class="nav-header font-weight-bold">SOPORTE TÉCNICO</li>
+                    <li class="nav-item">
+                        <a href="mantenimientos" class="nav-link">
+                            <i class="nav-icon fas fa-clipboard-list"></i>
+                            <p>Mantenimientos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reposicion" class="nav-link">
+                            <i class="nav-icon fas fa-sync-alt"></i>
+                            <p>Reposiciones</p>
                         </a>
                     </li>';
                 }
-
                 ?>
-                <!-- Bloque de opciones de menú por usuario -->
-                <!-- <li class="nav-header">Reportes</li>
-                <li class="nav-item">
-                    <a href="reporte-coordinador" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
-                        <p>
-                            Coordinador
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="reporte-jefatura" class="nav-link">
-                        <i class="nav-icon fas fa-chart-line"></i>
-                        <p>
-                            Jefatura
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="reporte-responsable" class="nav-link">
-                        <i class="nav-icon fas fa-chart-bar"></i>
-                        <p>
-                            Responsable
-                        </p>
-                    </a>
-                </li> -->
+<?php
+                if ($_SESSION["loginPerfilSTW"] == 4 ) {
+                    echo '<li class="nav-header font-weight-bold">COMPLEMENTOS</li>
+                    <li class="nav-item">
+                        <a href="diagnosticos" class="nav-link">
+                            <i class="nav-icon fas fa-laptop-medical"></i>
+                            <p>Diágnosticos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="acciones" class="nav-link">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p>Acciones Realizadas</p>
+                        </a>
+                    </li>
+                    <li class="nav-header font-weight-bold">INVENTARIO</li>
+                    <li class="nav-item">
+                        <a href="equipos-computo" class="nav-link">
+                            <i class="nav-icon fas fa-laptop"></i>
+                            <p>Computadoras</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="equipos-otros" class="nav-link">
+                            <i class="nav-icon fas fa-keyboard"></i>
+                            <p>Périfericos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="equipos-redes" class="nav-link">
+                            <i class="nav-icon fas fa-network-wired"></i>
+                            <p>Redes</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-header font-weight-bold">INTEGRACIÓN</li>
+                    <li class="nav-item">
+                        <a href="integracion-ec" class="nav-link">
+                            <i class="nav-icon fas fa-desktop"></i>
+                            <p>PC/Laptop/Servidor</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="integracion-ep" class="nav-link">
+                            <i class="nav-icon fas fa-print"></i>
+                            <p>Impresoras y Otros</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="integracion-er" class="nav-link">
+                            <i class="nav-icon fas fa-server"></i>
+                            <p>Redes</p>
+                        </a>
+                    </li>
+                    <li class="nav-header font-weight-bold">SOPORTE TÉCNICO</li>
+                    <li class="nav-item">
+                        <a href="mantenimientos" class="nav-link">
+                            <i class="nav-icon fas fa-clipboard-list"></i>
+                            <p>Mantenimientos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reposicion" class="nav-link">
+                            <i class="nav-icon fas fa-sync-alt"></i>
+                            <p>Reposiciones</p>
+                        </a>
+                    </li>';
+                }
+                ?>
             </ul>
         </nav>
     </div>

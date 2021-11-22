@@ -1,15 +1,15 @@
-$("#usuarioLogMR").keyup(function () {
+$("#usuarioLogSTW").keyup(function () {
     var u4 = $(this).val();
     var mu4 = u4.toLowerCase();
-    $("#usuarioLogMR").val(mu4);
+    $("#usuarioLogSTW").val(mu4);
 });
-$("#usuarioLogMR").keyup(function () {
+$("#usuarioLogSTW").keyup(function () {
     this.value = (this.value + "").replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ]/g, "");
 });
 
 function ValidarLoginMR() {
-    var usuarioLog = $("#usuarioLogMR").val();
-    var passwordLog = $("#usuarioPassMR").val();
+    var usuarioLog = $("#usuarioLogSTW").val();
+    var passwordLog = $("#usuarioPassSTW").val();
 
     if (usuarioLog.length == 0 || passwordLog.length == 0) {
         Swal.fire({
@@ -21,10 +21,10 @@ function ValidarLoginMR() {
         return false
     }
 }
-$("#btnLoginMR").on("click", function () {
+$("#btnLoginSTW").on("click", function () {
     ValidarLoginMR()
 });
-$("#usuarioLogMR").change(function () {
+$("#usuarioLogSTW").change(function () {
     var cuenta = $(this).val();
     var datos = new FormData();
 
@@ -40,12 +40,12 @@ $("#usuarioLogMR").change(function () {
         dataType: "json",
         success: function (respuesta) {
             if (respuesta) {
-                $("#usuarioPassMR").focus();
-                $("#mensajeLogMR").addClass("d-none");
+                $("#usuarioPassSTW").focus();
+                $("#mensajeLogSTW").addClass("d-none");
             } else {
-                $("#usuarioLogMR").val("");
-                $("#usuarioLogMR").focus();
-                $("#mensajeLogMR").removeClass("d-none");
+                $("#usuarioLogSTW").val("");
+                $("#usuarioLogSTW").focus();
+                $("#mensajeLogSTW").removeClass("d-none");
             }
         },
     });

@@ -7,7 +7,7 @@
             <div class="card-body">
                 <p class="login-box-msg font-weight-bold h5 text-secondary">Sistema de Soporte Técnico Informático - HNSEB <br><span class="font-italic h6">v.2022.01.05</span></p>
                 <form action="" method="post" id="frmLoginQS">
-                    <div id="mensajeLogMR" class="d-none">
+                    <div id="mensajeLogSTW" class="d-none">
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                             <h5><i class="icon fas fa-ban"></i> ¡ATENCIÓN!</h5>
@@ -20,7 +20,7 @@
                                 <span class="fas fa-user-lock"></span>
                             </div>
                         </div>
-                        <input type="text" class="form-control" placeholder="Ingrese usuario" id="usuarioLogMR" name="usuarioLogMR" autocomplete="off" required>
+                        <input type="text" class="form-control" placeholder="Ingrese usuario" id="usuarioLogSTW" name="usuarioLogSTW" autocomplete="off" required>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -28,7 +28,7 @@
                                 <span class="fas fa-key"></span>
                             </div>
                         </div>
-                        <input type="password" class="form-control" placeholder="Ingrese contraseña" id="usuarioPassMR" name="usuarioPassMR" autocomplete="off" required>
+                        <input type="password" class="form-control" placeholder="Ingrese contraseña" id="usuarioPassSTW" name="usuarioPassSTW" autocomplete="off" required>
                     </div>
                     <div class="row">
                         <div class="col-8 ml-5">
