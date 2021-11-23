@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 22-11-2021 a las 19:55:53
+-- Tiempo de generación: 23-11-2021 a las 19:59:15
 -- Versión del servidor: 5.7.33
 -- Versión de PHP: 7.4.25
 
@@ -63,9 +63,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ANULAR_REPOSICION` (IN `_idReposici
 UPDATE ws_reposiciones SET diagnostico1 = 0, diagnostico2 = 0, diagnostico3 = 0, diagnostico4 = 0, diagnostico5 = 0, diagnostico6 = 0, diagnostico7 = 0, diagnostico8 = 0, accion1 = 0, accion2 = 0, accion3 = 0, accion4 = 0, accion5 = 0, accion6 = 0, accion7 = 0, accion8 = 0, estAnulado = 2 where idReposicion = _idReposicion;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `DESBLOQUEAR_USUARIO` (IN `_id_usuario` INT(11))  BEGIN
-UPDATE ws_usuarios set nintentos = 0 where id_usuario = _id_usuario;
-END$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Desbloquear_Usuario` (IN `_idUsuario` INT(11))  UPDATE ws_usuarios SET nintentos = 0 WHERE id_usuario = _idUsuario$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `EDITAR_CATEGORIA` (IN `_idCategoria` INT(11), IN `_categoria` TEXT, IN `_segmento` INT(11))  BEGIN
 UPDATE ws_categorias SET categoria = _categoria, segmento = _segmento WHERE idCategoria = _idCategoria;
@@ -189,7 +187,40 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ELIMINAR_SERVICIO_OD` (IN `_id_suba
 DELETE FROM ws_servicios WHERE id_subarea = _id_subarea;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ListarUsuarios` ()  SELECT id_usuario,usuario.id_perfil,perfil,dni,nombres,apellido_paterno,apellido_materno,cuenta,clave,date_format(fecha_registro,'%d-%m-%Y') as fecha_registro,estado FROM ws_usuarios as usuario inner join ws_perfiles as perf on usuario.id_perfil = perf.id_perfil$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Habilitar_Usuario` (IN `_id_usuario` INT(11), IN `_estado` INT(11))  UPDATE ws_usuarios SET estado = _estado WHERE id_usuario = _id_usuario$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListarPerfiles` ()  SELECT
+	ws_perfiles.id_perfil, 
+	ws_perfiles.perfil
+FROM
+	ws_perfiles ORDER BY id_perfil ASC$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListarUsuarios` ()  SELECT
+	ws_usuarios.id_usuario, 
+	ws_usuarios.dni, 
+	ws_usuarios.nombres, 
+	ws_usuarios.apellido_paterno, 
+	ws_usuarios.apellido_materno, 
+	ws_usuarios.correo, 
+	ws_usuarios.cuenta, 
+	ws_usuarios.clave, 
+	date_format( fecha_registro, '%d-%m-%Y' ) AS fecha_registro, 
+	ws_usuarios.nintentos, 
+	ws_usuarios.id_perfil, 
+	ws_perfiles.perfil, 
+	ws_usuarios.estado, 
+	ws_estadousuario.descripEstadoUs
+FROM
+	ws_usuarios
+	INNER JOIN
+	ws_perfiles
+	ON 
+		ws_usuarios.id_perfil = ws_perfiles.id_perfil
+	INNER JOIN
+	ws_estadousuario
+	ON 
+		ws_usuarios.estado = ws_estadousuario.idEstadoUs
+		ORDER BY ws_perfiles.id_perfil ASC$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `LISTAR_ACCIONES` ()  BEGIN
 SELECT idAccion,accionrealizada,segment,descSegmento FROM ws_acciones AS a INNER JOIN ws_segmento AS s ON a.segment = s.idSegmento order by accionrealizada asc;
@@ -870,6 +901,13 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `REGISTRO_USUARIO` (IN `_perfil` INT(11), IN `_dni` VARCHAR(8), IN `_nombres` TEXT, IN `_apellidoPat` TEXT, IN `_apellidoMat` TEXT, IN `_cuenta` TEXT, IN `_clave` TEXT)  BEGIN
 INSERT INTO ws_usuarios(id_perfil, dni, nombres, apellido_paterno,apellido_materno, cuenta, clave) VALUES(_perfil,_dni,_nombres,_apellidoPat,_apellidoMat,_cuenta,_clave);
 END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Verifica_EstadoLog` (IN `_Usuario` INT(11))  SELECT
+	ws_usuarios.id_usuario, 
+	ws_usuarios.estado
+FROM
+	ws_usuarios
+WHERE id_usuario =_Usuario$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Z_REG_AUDITORIAMANT` (IN `_idDoc` INT(11), IN `_usExec` INT(11), IN `_accExec` TEXT, IN `_fecha_audi` DATE)  BEGIN
 INSERT INTO ws_z_auditoria_mantenimientos(idDoc,usExec,accExec,fecha_audi) VALUES(_idDoc,_usExec,_accExec,_fecha_audi);
@@ -2570,7 +2608,8 @@ INSERT INTO `ws_integraciones` (`idIntegracion`, `correlativo_integracion`, `nro
 (47, 'FT-2021-00047', 'PC_0168', '', 1620, 0, 0, 0, NULL, NULL, '2021-11-12', 1, 35, 4, 43, 2, 2, 0, '2021-11-12 16:42:07'),
 (48, 'FT-2021-00048', '00', '', NULL, 0, 0, 0, NULL, 49, '2021-11-12', 3, 35, 4, 17, 1, 1, 0, '2021-11-12 17:21:03'),
 (49, 'FT-2021-00049', 'PRUEBA_4', '', 1625, 0, 0, 0, NULL, NULL, '2021-11-15', 1, 39, 24, 12, 1, 1, 0, '2021-11-15 14:29:41'),
-(50, 'FT-2021-00050', 'PC_0434', '', 1626, 0, 0, 0, NULL, NULL, '2021-11-15', 1, 29, 30, 114, 1, 2, 0, '2021-11-15 20:07:27');
+(50, 'FT-2021-00050', 'PC_0434', '', 1626, 0, 0, 0, NULL, NULL, '2021-11-15', 1, 29, 30, 114, 1, 2, 0, '2021-11-15 20:07:27'),
+(51, 'FT-2021-00051', 'PC_0718', '', 1404, 0, 0, 0, NULL, NULL, '2021-11-23', 1, 47, 19, 19, 1, 1, 0, '2021-11-23 13:33:31');
 
 --
 -- Disparadores `ws_integraciones`
@@ -2749,7 +2788,10 @@ INSERT INTO `ws_mantenimientos` (`idMantenimiento`, `correlativo_Mant`, `fRegist
 (97, 'FM-2021-00097', '2021-11-12', 1, 2, 1618, 4, 17, 35, 'N° Equipo: PC_0242 || Serie N°: PC0242 || Cod.Patr: 740899500517 || Marca: DELUX || Modelo: CASE TORRE || Descripción: PC 0242 COLOR NEGRO 00505INV2020 || IP:  || Procesador: CORE 2DUOI-2.0 GHZ || RAM: 1GB || Disco Duro: 25OGB', 'Equipo fuera de uso, esta malogrado', 9, 0, 0, 0, 0, 0, 0, 0, 5, '2021-11-12', 'Equipo fuera de uso, esta malogrado', '2021-11-12', '2021-11-12', 3, 5, 23, 0, 0, 0, 0, 0, 0, 0, 'Entregar el equipo malogrado a patrimonio; fue dado de baja en el año 2015 y repuesto por otro nuevo en el año 2016', 1, 2, 'NO', 'SI', 'El equipo ya no tiene reposición. El equipo permanece en custodia del usuario; refiere, tener y conservar importante respaldo e información. ', 5, 1, 1, '2021-11-12 17:11:55'),
 (98, 'FM-2021-00098', '2021-11-12', 10, 1, 571, 4, 17, 35, 'Serie N°: 6CM2480JTV || Cod.Patr: 740880370042 || Marca: HP || Modelo: LV2311 || Descripción: MONITOR LED 23 in', 'Equipo fuera de uso', 11, 0, 0, 0, 0, 0, 0, 0, 5, '2021-11-12', 'Revisión técnica solicitada en listado con memo 018-OE_HNSEB, para poder conocer el estado y condición actual de los equipos.', '2021-11-12', '2021-11-12', 3, 5, 62, 0, 0, 0, 0, 0, 0, 0, 'Se recomienda conservar en custodia el equipo, o bien su traslado externo a otra área usuaria que lo requiriera y lo solicite.', 1, 1, 'NO', 'SI', '', 5, 3, 1, '2021-11-12 17:49:06'),
 (99, 'FM-2021-00099', '2021-11-12', 10, 1, 580, 4, 17, 35, 'Serie N°: 6CM3101X1P || Cod.Patr: 740880370110 || Marca: HP || Modelo: LV1911 || Descripción: MONITOR LED 18.5 in', 'Equipo fuera de uso', 11, 0, 0, 0, 0, 0, 0, 0, 5, '2021-11-12', 'Revisión técnica solicitada en listado con memo 018-OE_HNSEB, para poder conocer el estado y condición actual de los equipos.', '2021-11-12', '2021-11-12', 3, 5, 62, 0, 0, 0, 0, 0, 0, 0, 'Se recomienda conservar en custodia el equipo, o bien su traslado externo a otra área usuaria que lo requiriera y lo solicite.', 1, 1, 'NO', 'NO', '', 5, 3, 1, '2021-11-12 19:02:53'),
-(100, 'FM-2021-00100', '2021-11-15', 1, 1, 1626, 30, 114, 29, 'N° Equipo: PC_0434 || Serie N°: PC0434 || Cod.Patr: 740899500273 || Marca: ECOTREND || Modelo: COMPATIBLE  || Descripción: CASE DE TORRE COLOR NEGRO || IP:  || Procesador: CORI I3-3.1 GHZ || RAM: 2GB || Disco Duro: 250GB', 'El equipo no enciende', 9, 0, 0, 0, 0, 0, 0, 0, 5, '2021-11-15', 'La placa principal esta malograda', '2021-11-15', '2021-11-15', 2, 5, 29, 14, 15, 0, 0, 0, 0, 0, 'Se recomienda incrementar la memoria ram a 4gb para optimizar el rendimiento del equipo', 1, 1, 'NO', 'NO', '', 5, 1, 1, '2021-11-15 20:14:52');
+(100, 'FM-2021-00100', '2021-11-15', 1, 1, 1626, 30, 114, 29, 'N° Equipo: PC_0434 || Serie N°: PC0434 || Cod.Patr: 740899500273 || Marca: ECOTREND || Modelo: COMPATIBLE  || Descripción: CASE DE TORRE COLOR NEGRO || IP:  || Procesador: CORI I3-3.1 GHZ || RAM: 2GB || Disco Duro: 250GB', 'El equipo no enciende', 9, 0, 0, 0, 0, 0, 0, 0, 5, '2021-11-15', 'La placa principal esta malograda', '2021-11-15', '2021-11-15', 2, 5, 29, 14, 15, 0, 0, 0, 0, 0, 'Se recomienda incrementar la memoria ram a 4gb para optimizar el rendimiento del equipo', 1, 1, 'NO', 'NO', '', 5, 1, 1, '2021-11-15 20:14:52'),
+(101, 'FM-2021-00101', '2021-11-23', 1, 1, 1404, 19, 19, 47, 'N° Equipo: PC_0718 || Serie N°: 558783 || Cod.Patr: 740899500773 || Marca: VASTEC || Modelo: KB-62 || Descripción: ESTACION DE TRABAJO || IP:  || Procesador: CORE i7 -3.2 GHZ || RAM: 8 GB || Disco Duro: 1 TB', 'PROBLEMAS CON EL SISTEMA OPERATIVO', 9, 0, 0, 0, 0, 0, 0, 0, 4, '2021-11-22', 'MANTENIMIENTO CORRECTIVO DEL SISTEMA OPERATIVO', '2021-11-22', '2021-11-23', 2, 4, 1, 13, 14, 15, 17, 16, 0, 0, 'se recomienda solicitar periódicamente su mantenimiento.', 1, 1, 'NO', 'NO', '', 4, 1, 1, '2021-11-23 13:37:18'),
+(102, 'FM-2021-00102', '2021-11-23', 1, 1, 1322, 4, 17, 35, 'N° Equipo: PC_0524 || Serie N°: MXL2500TFN || Cod.Patr: 740899500436 || Marca: HP || Modelo: HP ELITE 8300 SFF (50) || Descripción: ESTACION DE TRABAJO || IP:  || Procesador: CORE I7-3.4 GHZ || RAM: 4 GB || Disco Duro: 1 TB', 'EQUIPO SIN USO', 9, 0, 0, 0, 0, 0, 0, 0, 4, '2021-11-22', 'MANTENIMIENTO CORRECTIVO', '2021-11-22', '2021-11-23', 2, 4, 1, 13, 14, 15, 16, 0, 0, 0, 'SE RECOMIENDA SOLICITAR PERIODICAMENTE SU MANTENIMIENTO.', 1, 1, 'NO', 'NO', '', 4, 1, 1, '2021-11-23 14:05:06'),
+(103, 'FM-2021-00103', '2021-11-23', 10, 1, 571, 4, 17, 35, 'Serie N°: 6CM2480JTV || Cod.Patr: 740880370042 || Marca: HP || Modelo: LV2311 || Descripción: MONITOR LED 23 in', 'sin uso', 11, 0, 0, 0, 0, 0, 0, 0, 4, '2021-11-22', 'limpieza general', '2021-11-22', '2021-11-23', 1, 4, 6, 0, 0, 0, 0, 0, 0, 0, 'se entrega monitor en optimas condiciones.', 1, 1, 'NO', 'NO', '', 4, 3, 1, '2021-11-23 15:11:27');
 
 --
 -- Disparadores `ws_mantenimientos`
@@ -2786,10 +2828,10 @@ CREATE TABLE `ws_perfiles` (
 --
 
 INSERT INTO `ws_perfiles` (`id_perfil`, `perfil`, `fecha_creacion`) VALUES
-(1, 'Administrador', '2020-02-20 16:34:02'),
-(2, 'Jefe', '2020-02-20 16:34:11'),
-(3, 'Coordinador', '2020-09-16 18:34:30'),
-(4, 'Técnico', '2021-03-01 16:33:37');
+(1, 'ADMINISTRADOR', '2020-02-20 16:34:02'),
+(2, 'JEFE(A)', '2020-02-20 16:34:11'),
+(3, 'COORDINADOR(A)', '2020-09-16 18:34:30'),
+(4, 'TÉCNICO(A)', '2021-03-01 16:33:37');
 
 -- --------------------------------------------------------
 
@@ -3200,6 +3242,7 @@ CREATE TABLE `ws_usuarios` (
   `nombres` text COLLATE utf8_bin NOT NULL,
   `apellido_paterno` text COLLATE utf8_bin NOT NULL,
   `apellido_materno` text COLLATE utf8_bin NOT NULL,
+  `correo` text COLLATE utf8_bin,
   `cuenta` text COLLATE utf8_bin NOT NULL,
   `clave` text COLLATE utf8_bin NOT NULL,
   `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -3211,13 +3254,14 @@ CREATE TABLE `ws_usuarios` (
 -- Volcado de datos para la tabla `ws_usuarios`
 --
 
-INSERT INTO `ws_usuarios` (`id_usuario`, `id_perfil`, `dni`, `nombres`, `apellido_paterno`, `apellido_materno`, `cuenta`, `clave`, `fecha_registro`, `estado`, `nintentos`) VALUES
-(1, 1, '77478995', 'Olger Ivan', 'Castro', 'Palacios', 'ocastrop', '$2a$07$usesomesillystringforeVF6hLwtgsUBAmUN4cGEd8tYF74gSHRW', '2020-03-02 16:22:25', 1, 2),
-(2, 2, '40195996', 'Monica Nohemi', 'Rosas', 'Sanchez', 'rosasmn', '$2a$07$usesomesillystringforeoRNSqF5ebwOJ.HFIcVhNJ65bww3hpNi', '2021-03-11 15:46:33', 1, 0),
-(3, 2, '09966920', 'Javier Octavio', 'Sernaque', 'Quintana', 'jsernaqueq', '$2a$07$usesomesillystringforeAR0AYDLcMUwZJGc02Ta3T98Pn6LH7pi', '2021-03-11 15:48:50', 1, 0),
-(4, 3, '42162499', 'Edwin William', 'Guerrero', 'Sandoval', 'wguerreros', '$2a$07$usesomesillystringforeLTVm.b0q8aUqKwOyqhotBMNXub2QEkq', '2021-03-11 15:52:31', 1, 1),
-(5, 4, '09401769', 'Segundo Andres', 'Cruzado', 'Cotrina', 'acruzadoc', '$2a$07$usesomesillystringfore9OBdlwIyha0dt84yf389aUSqD287miS', '2021-03-11 16:02:14', 1, 1),
-(6, 4, '09965283', 'Ivan Victor', 'Chuquicaña', 'Fernandez', 'vchuquicañaf', '$2a$07$usesomesillystringforetG4v5XsxFT5vjiUpPsTv0VEdAMT4jmW', '2021-03-11 16:02:59', 1, 0);
+INSERT INTO `ws_usuarios` (`id_usuario`, `id_perfil`, `dni`, `nombres`, `apellido_paterno`, `apellido_materno`, `correo`, `cuenta`, `clave`, `fecha_registro`, `estado`, `nintentos`) VALUES
+(1, 1, '77478995', 'OLGER IVAN', 'CASTRO', 'PALACIOS', 'ocastrop@hnseb.gob.pe', 'ocastrop', '$2a$07$usesomesillystringforeVF6hLwtgsUBAmUN4cGEd8tYF74gSHRW', '2020-03-02 16:22:25', 1, 0),
+(2, 2, '40195996', 'MONICA NOEMI', 'ROSAS', 'SANCHEZ', 'rosasmn@hnseb.gob.pe', 'rosasmn', '$2a$07$usesomesillystringforeoRNSqF5ebwOJ.HFIcVhNJ65bww3hpNi', '2021-03-11 15:46:33', 1, 0),
+(3, 2, '09966920', 'JAVIER OCTAVIO', 'SERNAQUE', 'QUINTANA', 'jsernaque@hnseb.gob.pe', 'jsernaqueq', '$2a$07$usesomesillystringforeAR0AYDLcMUwZJGc02Ta3T98Pn6LH7pi', '2021-03-11 15:48:50', 1, 0),
+(4, 3, '42162499', 'WILLIAM', 'GUERRERO', 'SANDOVAL', 'wguerreros@hnseb.gob.pe', 'wguerreros', '$2a$07$usesomesillystringforeLTVm.b0q8aUqKwOyqhotBMNXub2QEkq', '2021-03-11 15:52:31', 1, 0),
+(5, 4, '09401769', 'ANDRES', 'CRUZADO', 'COTRINA', 'acruzadoc@hnseb.gob.pe', 'acruzadoc', '$2a$07$usesomesillystringfore9OBdlwIyha0dt84yf389aUSqD287miS', '2021-03-11 16:02:14', 1, 0),
+(6, 4, '09965283', 'VICTOR', 'CHUQUICAÑA', 'FERNANDEZ', 'vchuquicañaf@hnseb.gob.pe', 'vchuquicañaf', '$2a$07$usesomesillystringforetG4v5XsxFT5vjiUpPsTv0VEdAMT4jmW', '2021-03-11 16:02:59', 1, 0),
+(7, 1, '10000000', 'ADMIN', 'SOPORTE', 'TECNICO', 'estadistica@hnseb.gob.pe', 'adminstw', '$2a$07$usesomesillystringfore4nxVeM7wAK0nKU/agj48PuIslH0DatW', '2021-11-23 17:54:51', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -3315,7 +3359,8 @@ INSERT INTO `ws_z_auditoria_mantenimientos` (`idAudMant`, `idDoc`, `usExec`, `ac
 (74, 87, 1, 'Modificación', '2021-11-15', '2021-11-15 14:33:54'),
 (75, 88, 1, 'Anulación', '2021-11-15', '2021-11-15 14:34:10'),
 (76, 89, 1, 'Modificación', '2021-11-15', '2021-11-15 14:40:23'),
-(77, 90, 1, 'Modificación', '2021-11-15', '2021-11-15 14:45:20');
+(77, 90, 1, 'Modificación', '2021-11-15', '2021-11-15 14:45:20'),
+(78, 103, 4, 'Modificación', '2021-11-23', '2021-11-23 15:19:32');
 
 -- --------------------------------------------------------
 
@@ -3539,13 +3584,13 @@ ALTER TABLE `ws_estadousuario`
 -- AUTO_INCREMENT de la tabla `ws_integraciones`
 --
 ALTER TABLE `ws_integraciones`
-  MODIFY `idIntegracion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `idIntegracion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `ws_mantenimientos`
 --
 ALTER TABLE `ws_mantenimientos`
-  MODIFY `idMantenimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `idMantenimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT de la tabla `ws_perfiles`
@@ -3593,13 +3638,13 @@ ALTER TABLE `ws_tipotrabajo`
 -- AUTO_INCREMENT de la tabla `ws_usuarios`
 --
 ALTER TABLE `ws_usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `ws_z_auditoria_mantenimientos`
 --
 ALTER TABLE `ws_z_auditoria_mantenimientos`
-  MODIFY `idAudMant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `idAudMant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT de la tabla `ws_z_auditoria_reposiciones`

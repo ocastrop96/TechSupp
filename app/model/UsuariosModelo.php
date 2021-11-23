@@ -24,19 +24,20 @@ class UsuariosModelo
     {
         if ($item != null) {
             $stmt = Conexion::conectar()->prepare("SELECT
-            ws_usuarios.id_usuario,
-            ws_usuarios.dni,
-            ws_usuarios.nombres,
-            ws_usuarios.apellido_paterno,
-            ws_usuarios.apellido_materno,
-            ws_usuarios.cuenta,
-            ws_usuarios.clave,
-            date_format(fecha_registro,'%d-%m-%Y') as fecha_registro,
-            ws_usuarios.nintentos,
-            ws_usuarios.id_perfil,
-            ws_perfiles.perfil,
-            ws_usuarios.estado,
-            ws_estadousuario.descripEstadoUs 
+            	ws_usuarios.id_usuario, 
+                ws_usuarios.dni, 
+                ws_usuarios.nombres, 
+                ws_usuarios.apellido_paterno, 
+                ws_usuarios.apellido_materno, 
+                ws_usuarios.correo, 
+                ws_usuarios.cuenta, 
+                ws_usuarios.clave, 
+                date_format( fecha_registro, '%d-%m-%Y' ) AS fecha_registro, 
+                ws_usuarios.nintentos, 
+                ws_usuarios.id_perfil, 
+                ws_perfiles.perfil, 
+                ws_usuarios.estado, 
+                ws_estadousuario.descripEstadoUs
         FROM
             ws_usuarios
             INNER JOIN ws_perfiles ON ws_usuarios.id_perfil = ws_perfiles.id_perfil
@@ -57,7 +58,7 @@ class UsuariosModelo
 
     static public function mdlListarTiposRoles()
     {
-        $stmt = Conexion::conectar()->prepare("CALL Listar_Perfiles_Users()");
+        $stmt = Conexion::conectar()->prepare("CALL ListarPerfiles()");
         $stmt->execute();
         return $stmt->fetchAll();
         $stmt->close();
@@ -103,7 +104,7 @@ class UsuariosModelo
         $stmt->close();
         $stmt = null;
     }
-    static public function mdlActualizarUsuario($idUsuario, $idEstado)
+    static public function mdlHabilitarUsuario($idUsuario, $idEstado)
     {
         $stmt = Conexion::conectar()->prepare("CALL Habilitar_Usuario(:idUsuario,:idEstado)");
         $stmt->bindParam(":idUsuario", $idUsuario, PDO::PARAM_STR);

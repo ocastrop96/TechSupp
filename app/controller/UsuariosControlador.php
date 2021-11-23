@@ -57,23 +57,23 @@ class UsuariosControlador
                                     icon: "warning",
                                     title: "Su cuenta está inhabilitada, comuníquese con el administrador de sistema!",
                                     showConfirmButton: false,
-                                    timer: 1200
+                                    timer: 1600
                                 });
                                 function redirect(){
                                     window.location = "signin";
                                 }
-                                setTimeout(redirect,1200);
+                                setTimeout(redirect,1600);
                                  </script>';
                     }
                     // Validación de habilitación
                 } elseif ($encriptaPass != $rptLogin["clave"]) {
-                    $id = $rptLogin["idUsuario"];
+                    $id = $rptLogin["id_usuario"];
                     $registroIntentos = UsuariosModelo::mdlRegistroIntentos($id);
                     $mensajeIntentos = "";
                     $limite = 3;
-                    if ($rptLogin["intentos"] < 3) {
-                        $mensajeIntentos = "Te quedan " . ($limite - $rptLogin["intentos"]) . " intento(s)";
-                    } elseif ($rptLogin["intentos"] == 3) {
+                    if ($rptLogin["nintentos"] < 3) {
+                        $mensajeIntentos = "Te quedan " . ($limite - $rptLogin["nintentos"]) . " intento(s)";
+                    } elseif ($rptLogin["nintentos"] == 3) {
                         $mensajeIntentos = "No te quedan más intentos";
                     } else {
                         $mensajeIntentos = "Haz excedido el número de intentos. Tu cuenta ha sido bloqueada";
@@ -83,12 +83,12 @@ class UsuariosControlador
                         icon: "error",
                         title: "El usuario y/o contraseña ingresados no son correctos.' . $mensajeIntentos . '",
                         showConfirmButton: false,
-                        timer: 1200
+                        timer: 1600
                     });
                     function redirect(){
                         window.location = "signin";
                     }
-                    setTimeout(redirect,1200);
+                    setTimeout(redirect,1600);
                 </script>';
                 } else {
                     echo '<script>
@@ -96,12 +96,12 @@ class UsuariosControlador
                                 icon: "error",
                                 title: "El usuario y/o contraseña ingresados no son correctos",
                                 showConfirmButton: false,
-                                timer: 1200
+                                timer: 1600
                             });
                             function redirect(){
                                 window.location = "signin";
                             }
-                            setTimeout(redirect,1200);
+                            setTimeout(redirect,1600);
                              </script>';
                 }
             } else {
@@ -110,12 +110,12 @@ class UsuariosControlador
                         icon: "error",
                         title: "¡Ingrese correctamente sus credenciales!",
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 1800
                     });
                     function redirect(){
                         window.location = "signin";
                     }
-                    setTimeout(redirect,1200);
+                    setTimeout(redirect,1800);
                 </script>';
             }
         }

@@ -16,34 +16,41 @@ class DatatableUsuarios
             "data": [';
 
         for ($i = 0; $i < count($usuarios); $i++) {
-
             // Perfil con iconos
-            if ($usuarios[$i]["perfil"] == 1) {
-                $perfil = "<i class='fas fa-user-cog'></i>&nbsp" . $usuarios[$i]["descPerfil"] . "";
-            } else if ($usuarios[$i]["perfil"] == 2) {
-                $perfil = "<i class='fas fa-user-tie'></i>&nbsp" . $usuarios[$i]["descPerfil"] . "";
+            if ($usuarios[$i]["id_perfil"] == 1) {
+                $perfil = "<i class='fas fa-user-tie'></i>&nbsp" . $usuarios[$i]["perfil"] . "";
+            } else if ($usuarios[$i]["id_perfil"] == 4) {
+                $perfil = "<i class='fas fa-hands-helping'></i>&nbsp" . $usuarios[$i]["perfil"] . "";
+            } else if ($usuarios[$i]["id_perfil"] == 3) {
+                $perfil = "<i class='fas fa-user-clock'></i>&nbsp" . $usuarios[$i]["perfil"] . "";
             } else {
-                $perfil = "<i class='fas fa-hospital-user'></i>&nbsp" . $usuarios[$i]["descPerfil"] . "";
+                $perfil = "<i class='fas fa-user-cog'></i>&nbsp" . $usuarios[$i]["perfil"] . "";
             }
             // Botones de Estado
             if (($usuarios[$i]["estado"] != 2)) {
-                $estado = "<button type='button' class='btn btn-block btn-success btnHabilitar' idUsuario='" . $usuarios[$i]["idUsuario"] . "' idEstado='2'><i class='fas fa-user-check'></i>HABILITADO</button>";
+                $estado = "<button type='button' class='btn btn-block btn-success btnHabilitar' idUsuario='" . $usuarios[$i]["id_usuario"] . "' idEstado='2'><i class='fas fa-user-check'></i>HABILITADO</button>";
             } else {
-                $estado = "<button type='button' class='btn btn-block btn-danger btnHabilitar' idUsuario='" . $usuarios[$i]["idUsuario"] . "' idEstado='1'><i class='fas fa-user-minus'></i>INHABILITADO</button>";
+                $estado = "<button type='button' class='btn btn-block btn-danger btnHabilitar' idUsuario='" . $usuarios[$i]["id_usuario"] . "' idEstado='1'><i class='fas fa-user-minus'></i>INHABILITADO</button>";
             }
             // Botones de Opciones
-            $botones = "<div class='btn-group'><button class='btn btn-warning btnEditarUsuario' idUsuario='" . $usuarios[$i]["idUsuario"] . "' data-toggle='modal' data-target='#modal-editar-usuario'><i class='fas fa-edit'></i></button><button class='btn btn-info btnDesbloquearUsuario' data-toggle='tooltip' data-placement='left' title='Desbloquear Usuario' idUsuario='" . $usuarios[$i]["idUsuario"] . "'><i class='fas fa-unlock-alt'></i></button><button class='btn btn-danger btnEliminarUsuario' data-toggle='tooltip' data-placement='left' title='Eliminar Usuario' idUsuario='" . $usuarios[$i]["idUsuario"] . "'><i class='fas fa-trash-alt'></i></button></div>";
 
+            // CONDICIONALES PARA BOTONES
+            if (isset($_GET["perfilUsuario"]) && $_GET["perfilUsuario"] == 1) {
+                $botones = "<div class='btn-group'><button class='btn btn-warning btnEditarUsuario' idUsuario='" . $usuarios[$i]["id_usuario"] . "' data-toggle='modal' data-target='#modal-editar-usuario'><i class='fas fa-edit'></i></button><button class='btn btn-info btnDesbloquearUsuario' data-toggle='tooltip' data-placement='left' title='Desbloquear Usuario' idUsuario='" . $usuarios[$i]["id_usuario"] . "'><i class='fas fa-unlock-alt'></i></button><button class='btn btn-danger btnEliminarUsuario' data-toggle='tooltip' data-placement='left' title='Eliminar Usuario' idUsuario='" . $usuarios[$i]["id_usuario"] . "'><i class='fas fa-trash-alt'></i></button></div>";
+            } else if (isset($_GET["perfilUsuario"]) && $_GET["perfilUsuario"] > 1) {
+                $botones = "<div class='btn-group'><button class='btn btn-warning btnEditarUsuario' idUsuario='" . $usuarios[$i]["id_usuario"] . "' data-toggle='modal' data-target='#modal-editar-usuario'><i class='fas fa-edit'></i></button><button class='btn btn-info btnDesbloquearUsuario' data-toggle='tooltip' data-placement='left' title='Desbloquear Usuario' idUsuario='" . $usuarios[$i]["id_usuario"] . "'><i class='fas fa-unlock-alt'></i></button></div>";
+            }
+            // CONDICIONALES PARA BOTONES
             $datos_json .= '[
                 "' . ($i + 1) . '",
                 "' . $usuarios[$i]["dni"] . '",
                 "' . $usuarios[$i]["nombres"] . '",
-                "' . $usuarios[$i]["apellidos"] . '",
+                "' . $usuarios[$i]["apellido_paterno"] . ' ' . $usuarios[$i]["apellido_materno"] . '",
                 "' . $perfil . '",
                 "' . $usuarios[$i]["correo"] . '",
+                "' . $usuarios[$i]["fecha_registro"] . '",
                 "' . $usuarios[$i]["cuenta"] . '",
-                "' . $usuarios[$i]["fechaAlta"] . '",
-                "' . $estado . '",
+                "' .  $estado . '",
                 "' . $botones . '"
             ],';
         }

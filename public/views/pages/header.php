@@ -8,36 +8,31 @@
   <ul class="navbar-nav ml-auto">
     <!-- Notifications Dropdown Menu -->
     <li class="nav-item dropdown">
-      <!-- <a class="nav-link" data-toggle="dropdown" href="#">
+      <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fas fa-cogs"></i>
-          <span class="badge badge-warning navbar-badge">+</span>
-        </a> -->
-      <!-- <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="badge badge-danger navbar-badge">+</span>
+        </a> 
+      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">Opciones del Usuario</span>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
+            <i class="fas fa-id-card"></i> Mi Perfil
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
+            <i class="fas fa-sync-alt"></i> Actualizar datos
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">Opciones del Usuario</a>
-        </div> -->
+          <span class="dropdown-item dropdown-footer">Opciones del Usuario</span>
+        </div>
     </li>
-    <input type="hidden" name="estatusLog" id="estatusLog" value="<?php echo $_SESSION["loginIdMR"]; ?>">
+    <input type="hidden" name="estatusLogId" id="estatusLogId" value="<?php echo $_SESSION["loginIdSTW"]; ?>">
+    <input type="hidden" name="perfilLog" id="perfilLog" value="<?php echo $_SESSION["loginPerfilSTW"]; ?>">
+
     <li class="nav-item">
       <a class="nav-link" href="signout" role="button">
         <i class="fas fa-sign-out-alt"></i>
-        <span class="float-right font-weight-bolder">&nbsp; Salir del sistema</span>
+        <span class="float-right font-weight-bolder">&nbsp; Cerrar Sesión</span>
       </a>
     </li>
   </ul>

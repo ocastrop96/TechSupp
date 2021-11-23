@@ -11,7 +11,7 @@ $(document).ready(function () {
     }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
 })
 
-window.onbeforeunload = ValidarEstadoLog($("#estatusLog").val());
+window.onbeforeunload = ValidarEstadoLog($("#estatusLogId").val());
 function ValidarEstadoLog(idLog) {
     if (idLog) {
         var idLogUs = idLog;

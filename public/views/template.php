@@ -93,6 +93,7 @@ session_start();
         if (isset($_GET["ruta"])) {
             if (
                 $_GET["ruta"] == "dashboard" ||
+                $_GET["ruta"] == "usuarios" ||
                 $_GET["ruta"] == "signout"
             ) {
                 include "pages/" . $_GET["ruta"] . ".php";
@@ -111,6 +112,7 @@ session_start();
     <!-- Scripts JS Propios -->
     <script type="text/javascript" src="public/js/main.js"></script>
     <script type="text/javascript" src="public/js/signin.js"></script>
+    <script type="text/javascript" src="public/js/usuarios.js"></script>
     <!-- Scripts JS Propios -->
 </body>
 

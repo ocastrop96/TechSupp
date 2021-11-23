@@ -1,6 +1,7 @@
 /** LISTADO DE USUARIOS */
-$(".datatableUsuariosMR").DataTable({
-    ajax: "public/views/util/DatatableUsuarios.php",
+var perfilUs = $("#perfilLog").val();
+$(".datatableUsuariosSTW").DataTable({
+    ajax: "public/views/util/DatatableUsuarios.php?perfilUsuario=" + perfilUs,
     deferRender: true,
     retrieve: true,
     processing: true,
@@ -8,384 +9,78 @@ $(".datatableUsuariosMR").DataTable({
     lengthChange: true,
     searching: true,
     ordering: true,
-    order: [
-        [4, "asc"]
-    ],
     info: true,
     autoWidth: false,
     language: {
         url: "public/views/resources/js/dataTables.spanish.lang",
     },
 });
-/** LISTADO DE USUARIOS */
-// Filtrado de campos
-$("#rgDni").attr("minlength", "8");
-$("#rgDni").attr("maxlength", "12");
-$("#rgDni").keyup(function () {
+
+
+$("#dniUsuario").keyup(function () {
     this.value = (this.value + "").replace(/[^0-9]/g, "");
-});
-$("#rgNombres").keyup(function () {
-    this.value = (this.value + "").replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]/g, "");
-});
-$("#rgApellidos").keyup(function () {
-    this.value = (this.value + "").replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]/g, "");
-});
-$("#rgUsuario").keyup(function () {
-    this.value = (this.value + "").replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ]/g, "");
-});
-
-$("#rgNombres").keyup(function () {
-    var u4 = $(this).val();
-    var mu4 = u4.toUpperCase();
-    $("#rgNombres").val(mu4);
-});
-$("#rgApellidos").keyup(function () {
-    var u4 = $(this).val();
-    var mu4 = u4.toUpperCase();
-    $("#rgApellidos").val(mu4);
-});
-$("#rgUsuario").keyup(function () {
-    var u4 = $(this).val();
-    var mu4 = u4.toLowerCase();
-    $("#rgUsuario").val(mu4);
-});
-$("#rgCorreo").keyup(function () {
-    var u4 = $(this).val();
-    var mu4 = u4.toLowerCase();
-    $("#rgCorreo").val(mu4);
-});
-$("#edtDni").attr("minlength", "8");
-$("#edtDni").attr("maxlength", "12");
-$("#edtDni").keyup(function () {
+  });
+  // $("#dniUsuario").attr("minlenght", 12);
+  $("#dniUsuario").attr("maxlength", "8");
+  
+  $("#edtdniUsuario").keyup(function () {
     this.value = (this.value + "").replace(/[^0-9]/g, "");
-});
-$("#edtNombres").keyup(function () {
-    this.value = (this.value + "").replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]/g, "");
-});
-$("#edtApellidos").keyup(function () {
-    this.value = (this.value + "").replace(/[^a-zA-ZñÑáéíóúüÁÉÍÓÚÜ ]/g, "");
-});
-$("#edtUsuario").keyup(function () {
-    this.value = (this.value + "").replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ]/g, "");
-});
-
-$("#edtNombres").keyup(function () {
-    var u4 = $(this).val();
-    var mu4 = u4.toUpperCase();
-    $("#edtNombres").val(mu4);
-});
-$("#edtApellidos").keyup(function () {
-    var u4 = $(this).val();
-    var mu4 = u4.toUpperCase();
-    $("#edtApellidos").val(mu4);
-});
-$("#edtUsuario").keyup(function () {
+  });
+  // $("#dniUsuario").attr("minlenght", 12);
+  $("#edtdniUsuario").attr("maxlength", "8");
+  
+  $("#nombreUsuario").keyup(function () {
+    this.value = (this.value + "").replace(/[^a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]/g, "");
+  });
+  $("#nombreUsuario").keyup(function () {
+    var u1 = $(this).val();
+    var mu1 = u1.toUpperCase();
+    $("#nombreUsuario").val(mu1);
+  });
+  $("#edtnombreUsuario").keyup(function () {
+    this.value = (this.value + "").replace(/[^a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]/g, "");
+  });
+  $("#apellidoUsuarioPat").keyup(function () {
+    this.value = (this.value + "").replace(/[^a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]/g, "");
+  });
+  $("#apellidoUsuarioPat").keyup(function () {
+    var u2 = $(this).val();
+    var mu2 = u2.toUpperCase();
+    $("#apellidoUsuarioPat").val(mu2);
+  });
+  $("#edtapellidoUsuarioPat").keyup(function () {
+    this.value = (this.value + "").replace(/[^a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]/g, "");
+  });
+  $("#apellidoUsuarioMat").keyup(function () {
+    this.value = (this.value + "").replace(/[^a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]/g, "");
+  });
+  $("#apellidoUsuarioMat").keyup(function () {
+    var u3 = $(this).val();
+    var mu3 = u3.toUpperCase();
+    $("#apellidoUsuarioMat").val(mu3);
+  });
+  $("#edtapellidoUsuarioMat").keyup(function () {
+    this.value = (this.value + "").replace(/[^a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]/g, "");
+  });
+  
+  $("#cuentaUsuario").keyup(function () {
+    this.value = (this.value + "").replace(/[^a-zA-Z\u00f1\u00d1]/g, "");
+  });
+  $("#cuentaUsuario").keyup(function () {
     var u4 = $(this).val();
     var mu4 = u4.toLowerCase();
-    $("#edtUsuario").val(mu4);
-});
-$("#edtCorreo").keyup(function () {
-    var u4 = $(this).val();
-    var mu4 = u4.toLowerCase();
-    $("#edtCorreo").val(mu4);
-});
-// Filtrado de campos
-// Validación de campos
-$.validator.addMethod(
-    "valueNotEquals",
-    function (value, element, arg) {
-        return arg !== value;
-    },
-    "Value must not equal arg."
-);
-$("#btnRegUsu").on("click", function () {
-    $("#formRegUs").validate({
-        rules: {
-            rgPerfil: {
-                valueNotEquals: "0",
-                required: true,
-            },
-            rgDni: {
-                required: true,
-                maxlength: 12,
-                minlength: 8,
-            },
-            rgNombres: {
-                required: true,
-            },
-            rgApellidos: {
-                required: true,
-            },
-            rgCorreo: {
-                required: true,
-                email: true,
-            },
-            rgUsuario: {
-                required: true,
-            },
-            rgClave: {
-                required: true,
-            },
-        },
-        messages: {
-            rgPerfil: {
-                valueNotEquals: "Seleccione Perfil",
-                required: "Seleccione perfil de usuario",
-            },
-            rgDni: {
-                required: "DNI Requerido",
-                maxlength: "Ingrese máximo 12 dígitos",
-                minlength: "Ingrese mínimo 8 dígitos",
-            },
-            rgNombres: {
-                required: "Nombres requerido",
-            },
-            rgApellidos: {
-                required: "Apellidos requerido",
-            },
-            rgCorreo: {
-                required: "Correo requerido",
-                email: "Ingrese un correo válido",
-            },
-            rgUsuario: {
-                required: "Cuenta de usuario requerido",
-            },
-            rgClave: {
-                required: "Contraseña requerida",
-            },
-        },
-        errorElement: "span",
-        errorPlacement: function (error, element) {
-            error.addClass("invalid-feedback");
-            element.closest(".form-group").append(error);
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).addClass("is-invalid");
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).removeClass("is-invalid");
-        },
-    });
-});
-
-$("#btnEdtUsu").on("click", function () {
-    $("#formEdtUs").validate({
-        rules: {
-            edtPerfil: {
-                valueNotEquals: "0",
-                required: true,
-            },
-            edtDni: {
-                required: true,
-                maxlength: 12,
-                minlength: 8,
-            },
-            edtNombres: {
-                required: true,
-            },
-            edtApellidos: {
-                required: true,
-            },
-            edtCorreo: {
-                required: true,
-                email: true,
-            },
-            edtUsuario: {
-                required: true,
-            },
-        },
-        messages: {
-            edtPerfil: {
-                valueNotEquals: "Seleccione Perfil",
-                required: "Seleccione perfil de usuario",
-            },
-            edtDni: {
-                required: "DNI Requerido",
-                maxlength: "Ingrese máximo 12 dígitos",
-                minlength: "Ingrese mínimo 8 dígitos",
-            },
-            edtNombres: {
-                required: "Nombres requerido",
-            },
-            edtApellidos: {
-                required: "Apellidos requerido",
-            },
-            edtCorreo: {
-                required: "Correo requerido",
-                email: "Ingrese un correo válido",
-            },
-            edtUsuario: {
-                required: "Cuenta de usuario requerido",
-            },
-        },
-        errorElement: "span",
-        errorPlacement: function (error, element) {
-            error.addClass("invalid-feedback");
-            element.closest(".form-group").append(error);
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).addClass("is-invalid");
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).removeClass("is-invalid");
-        },
-    });
-});
-// Validación de campos
-
-// Busqueda de Datos por DNI
-$("#rgDni").change(function () {
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 1500,
-    });
-    var dni = $(this).val();
-    var datos = new FormData();
-    datos.append("validarDni", dni);
-    $.ajax({
-        url: "public/views/src/ajaxUsuarios.php",
-        method: "POST",
-        data: datos,
-        cache: false,
-        contentType: false,
-        processData: false,
-        dataType: "json",
-        success: function (respuesta) {
-            if (respuesta) {
-                Toast.fire({
-                    icon: "warning",
-                    title: "El DNI Ingresado ya se encuentra registrado",
-                });
-                $("#rgDni").val("");
-                $("#rgNombres").val("");
-                $("#rgApellidos").val("");
-                $("#rgCorreo").val("");
-                $("#rgUsuario").val("");
-                $("#rgClave").val("");
-            } else {
-                $("#rgNombres").val("");
-                $("#rgApellidos").val("");
-                $("#btnDNIU").on("click", function () {
-                    var dni = $("#rgDni").val();
-                    if (dni.length = 8) {
-                        $.ajax({
-                            type: "GET",
-                            url:
-                                "https://dniruc.apisperu.com/api/v1/dni/" +
-                                dni +
-                                "?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im9jYXN0cm9wLnRpQGdtYWlsLmNvbSJ9.XtrYx8wlARN2XZwOZo6FeLuYDFT6Ljovf7_X943QC_E",
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (data) {
-
-                                if (data["apellidoPaterno"] == null) {
-                                    $("#rgNombres").focus();
-                                    $("#rgNombres").prop("readonly", false);
-                                    $("#rgApellidos").prop("readonly", false);
-                                    toastr.error("No se encontraron datos, ingrese manualmente", "DNI");
-                                }
-                                else {
-                                    $("#rgNombres").val(data["nombres"]);
-                                    $("#rgApellidos").val(data["apellidoPaterno"] + " " + data["apellidoMaterno"]);
-                                    $("#rgPerfil").focus();
-                                    $("#rgNombres").prop("readonly", true);
-                                    $("#rgApellidos").prop("readonly", true);
-                                }
-                            },
-                            failure: function (data) {
-                                toastr.info("No se pudo conectar los datos", "DNI");
-                            },
-                            error: function (data) {
-                                $("#rgNombres").prop("readonly", false);
-                                $("#rgApellidos").prop("readonly", false);
-                                $("#rgDni").focus();
-                                $('#formRegUs').trigger("reset");
-                            },
-                        });
-                    }
-                });
-            }
-        },
-    });
-});
-
-$("#edtDni").change(function () {
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 1500,
-    });
-    var dni = $(this).val();
-    var datos = new FormData();
-    datos.append("validarDni", dni);
-    $.ajax({
-        url: "public/views/src/ajaxUsuarios.php",
-        method: "POST",
-        data: datos,
-        cache: false,
-        contentType: false,
-        processData: false,
-        dataType: "json",
-        success: function (respuesta) {
-            if (respuesta) {
-                Toast.fire({
-                    icon: "warning",
-                    title: "El DNI Ingresado ya se encuentra registrado",
-                });
-                $("#edtDni").val("");
-                $("#edtDni").focus();
-            } else {
-                $("#edtNombres").val("");
-                $("#edtApellidos").val("");
-                $("#btnDNIUEdt").on("click", function () {
-                    var dni = $("#edtDni").val();
-                    if (dni.length = 8) {
-                        $.ajax({
-                            type: "GET",
-                            url:
-                                "https://dniruc.apisperu.com/api/v1/dni/" +
-                                dni +
-                                "?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im9jYXN0cm9wLnRpQGdtYWlsLmNvbSJ9.XtrYx8wlARN2XZwOZo6FeLuYDFT6Ljovf7_X943QC_E",
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (data) {
-
-                                if (data["apellidoPaterno"] == null) {
-                                    $("#edtNombres").focus();
-                                    $("#edtNombres").prop("readonly", false);
-                                    $("#edtApellidos").prop("readonly", false);
-                                    toastr.error("No se encontraron datos, ingrese manualmente", "DNI");
-
-                                } else {
-                                    $("#edtNombres").val(data["nombres"]);
-                                    $("#edtApellidos").val(data["apellidoPaterno"] + " " + data["apellidoMaterno"]);
-                                    $("#edtPerfil").focus();
-                                    $("#edtNombres").prop("readonly", true);
-                                    $("#edtApellidos").prop("readonly", true);
-                                }
-                            },
-                            failure: function (data) {
-                                toastr.info("No se pudo conectar los datos", "DNI");
-                            },
-                            error: function (data) {
-                                $("#edtNombres").prop("readonly", false);
-                                $("#edtApellidos").prop("readonly", false);
-                                $("#edtDni").focus();
-                                $('#formEdtUs').trigger("reset");
-                            },
-                        });
-                    }
-                });
-            }
-        },
-    });
-});
-// Busqueda de Datos por DNI
+    $("#cuentaUsuario").val(mu4);
+  });
+  $("#edtcuentaUsuario").keyup(function () {
+    this.value = (this.value + "").replace(/[^a-zA-Z\u00f1\u00d1]/g, "");
+  });
+  $("#edtcuentaUsuario").keyup(function () {
+    var u4edt = $(this).val();
+    var mu4edt = u4edt.toLowerCase();
+    $("#edtcuentaUsuario").val(mu4edt);
+  });
 // Editar Usuario
-$(".datatableUsuariosMR tbody").on("click", ".btnEditarUsuario", function () {
+$(".datatableUsuariosSTW tbody").on("click", ".btnEditarUsuario", function () {
     var idUsuario = $(this).attr("idUsuario");
     var datos = new FormData();
     datos.append("idUsuario", idUsuario);
@@ -398,21 +93,22 @@ $(".datatableUsuariosMR tbody").on("click", ".btnEditarUsuario", function () {
         processData: false,
         dataType: "json",
         success: function (respuesta) {
-            $("#idUsuario").val(respuesta["idUsuario"]);
-            $("#edtDni").val(respuesta["dni"]);
-            $("#edtNombres").val(respuesta["nombres"]);
-            $("#edtApellidos").val(respuesta["apellidos"]);
-            $("#edtPerfil").val(respuesta["perfil"]);
-            $("#edtPerfil").html(respuesta["descPerfil"]);
-            $("#edtCorreo").val(respuesta["correo"]);
-            $("#edtUsuario").val(respuesta["cuenta"]);
-            $("#passActual").val(respuesta["clave"]);
+            $("#idUsuario").val(respuesta["id_usuario"]);
+            $("#edtdniUsuario").val(respuesta["dni"]);
+            $("#edtnombreUsuario").val(respuesta["nombres"]);
+            $("#edtapellidoUsuarioPat").val(respuesta["apellido_paterno"]);
+            $("#edtapellidoUsuarioMat").val(respuesta["apellido_materno"]);
+            $("#edtcuentaUsuario").val(respuesta["cuenta"]);
+            $("#passwordActual").val(respuesta["clave"]);
+            $("#edtperfilUsuario").val(respuesta["id_perfil"]);
+            $("#edtperfilUsuario").html(respuesta["perfil"]);
         },
     });
 });
 // Editar Usuario
-// Habilitacion de Usuario
-$(".datatableUsuariosMR tbody").on("click", ".btnHabilitar", function () {
+
+// Habilitar Usuario
+$(".datatableUsuariosSTW tbody").on("click", ".btnHabilitar", function () {
     var idUsuario2 = $(this).attr("idUsuario");
     var idEstado = $(this).attr("idEstado");
     var datos = new FormData();
@@ -446,9 +142,10 @@ $(".datatableUsuariosMR tbody").on("click", ".btnHabilitar", function () {
         $(this).attr("idEstado", 2);
     }
 });
-// Habilitacion de Usuario
-// Desbloqueo de Usuario
-$(".datatableUsuariosMR tbody").on("click", ".btnDesbloquearUsuario", function () {
+// Habilitar Usuario
+
+// Desbloquear Usuario
+$(".datatableUsuariosSTW tbody").on("click", ".btnDesbloquearUsuario", function () {
     var idUsuario3 = $(this).attr("idUsuario");
     var datos = new FormData();
     datos.append("idUsuario3", idUsuario3);
@@ -464,9 +161,10 @@ $(".datatableUsuariosMR tbody").on("click", ".btnDesbloquearUsuario", function (
         },
     });
 });
-// Desbloqueo de Usuario
+// Desbloquear Usuario
+
 // Eliminar Usuario
-$(".datatableUsuariosMR tbody").on("click", ".btnEliminarUsuario", function () {
+$(".datatableUsuariosSTW tbody").on("click", ".btnEliminarUsuario", function () {
     var idUsuario4 = $(this).attr("idUsuario");
     Swal.fire({
         title: "¿Está seguro de eliminar al usuario?",
@@ -484,3 +182,102 @@ $(".datatableUsuariosMR tbody").on("click", ".btnEliminarUsuario", function () {
     });
 });
 // Eliminar Usuario
+
+$("#claveU1").on("click", function () {
+    var control3 = $(this);
+    var estatus3 = control3.data("activo");
+    var icon3 = control3.find("span");
+    if (estatus3 == false) {
+      control3.data("activo", true);
+      $(icon3).removeClass("fas fa-eye").addClass("fas fa-low-vision");
+      $("#claveUsuario").attr("type", "text");
+    }
+    else {
+      control3.data("activo", false);
+      $(icon3).removeClass("fas fa-low-vision").addClass("fas fa-eye");
+      $("#claveUsuario").attr("type", "password");
+    }
+  });
+
+  $("#dniUsuario").change(function () {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 1500,
+    });
+    var dni = $(this).val();
+    var datos = new FormData();
+    datos.append("validarDni", dni);
+    $.ajax({
+        url: "public/views/src/ajaxUsuarios.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function (respuesta) {
+            if (respuesta) {
+                Toast.fire({
+                    icon: "warning",
+                    title: "El DNI Ingresado ya se encuentra registrado",
+                });
+                $("#dniUsuario").val("");
+                $("#nombreUsuario").val("");
+                $("#apellidoUsuarioPat").val("");
+                $("#apellidoUsuarioMat").val("");
+                $("#dniUsuario").focus();
+            } else {
+                $("#nombreUsuario").val("");
+                $("#apellidoUsuarioPat").val("");
+                $("#apellidoUsuarioMat").val("");
+
+                $("#btnDNIU").on("click", function () {
+                    var dni = $("#dniUsuario").val();
+                    if (dni.length = 8) {
+                        $.ajax({
+                            type: "GET",
+                            url:
+                                "https://dniruc.apisperu.com/api/v1/dni/" +
+                                dni +
+                                "?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im9jYXN0cm9wQGhuc2ViLmdvYi5wZSJ9.kQIxUB6tdcsGBkLapIbw9dEVPHqvwyt6y94HxE7dpEk",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data["apellidoPaterno"] == null) {
+                                    $("#nombreUsuario").focus();
+                                    $("#nombreUsuario").prop("readonly", false);
+                                    $("#apellidoUsuarioPat").prop("readonly", false);
+                                    $("#apellidoUsuarioMat").prop("readonly", false);
+
+                                    toastr.error("No se encontraron datos, ingrese manualmente", "DNI");
+                                }
+                                else {
+                                    $("#nombreUsuario").val(data["nombres"]);
+                                    $("#apellidoUsuarioPat").val(data["apellidoPaterno"]);
+                                    $("#apellidoUsuarioMat").val(data["apellidoMaterno"]);
+                                    $("#perfilUsuario").focus();
+                                    $("#nombreUsuario").prop("readonly", true);
+                                    $("#apellidoUsuarioPat").prop("readonly", true);
+                                    $("#apellidoUsuarioMat").prop("readonly", true);
+                                }
+                            },
+                            failure: function (data) {
+                                toastr.info("No se pudo conectar los datos", "DNI");
+                            },
+                            error: function (data) {
+                                $("#nombreUsuario").prop("readonly", false);
+                                $("#apellidoUsuarioPat").prop("readonly", false);
+                                $("#apellidoUsuarioMat").prop("readonly", false);
+
+                                $("#dniUsuario").focus();
+                                $('#form-reg-usuario').trigger("reset");
+                            },
+                        });
+                    }
+                });
+            }
+        },
+    });
+});
