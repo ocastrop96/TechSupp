@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 24-11-2021 a las 19:44:30
+-- Tiempo de generación: 06-12-2021 a las 20:08:26
 -- Versión del servidor: 5.7.33
 -- Versión de PHP: 7.4.25
 
@@ -1003,7 +1003,9 @@ INSERT INTO `ws_acciones` (`idAccion`, `segment`, `accionrealizada`) VALUES
 (61, 1, 'Pruebas de funcionamiento del equipO'),
 (62, 3, 'Pruebas de funcionamiento del equipo'),
 (63, 1, 'Cooler para microprocesador malogrado'),
-(64, 1, 'Cambio de microprocesador');
+(64, 1, 'Cambio de microprocesador'),
+(65, 3, 'Limpieza general'),
+(66, 2, 'Limpieza general');
 
 -- --------------------------------------------------------
 
@@ -2446,7 +2448,9 @@ INSERT INTO `ws_equipos` (`idEquipo`, `tipSegmento`, `idTipo`, `uResponsable`, `
 (1623, 3, 11, 35, 4, 17, '1822SC50QU98', '0', 'LOGITECH', 'Y U0009', 'TECLADO', '2021-11-08', '0', '1 AÑO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'REGISTRO NUEVO', NULL, NULL, 1, 1, 1, '2021-11-15 08:55:02'),
 (1624, 3, 11, 35, 4, 17, 'INV2019COD02724', '0', 'MICRONICS', 'MIC KB706', 'TECLADO', '2021-11-01', '0', '1 AÑO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'REGISTRO NUEVO', NULL, NULL, 1, 1, 1, '2021-11-15 09:01:06'),
 (1625, 1, 1, 39, 24, 12, 'VA0914S2821', '740899500791', 'VASTEC', 'VASTEC276774', 'PC DE ESCRITORIO', '2019-11-07', '0', '3 AÑOS', 'VASTEC', 'CORE I7', '3.60 GHZ', '4GB', '1TB', NULL, NULL, 'REGISTRO NUEVO', NULL, NULL, 1, 1, 1, '2021-11-15 09:04:31'),
-(1626, 1, 1, 29, 30, 114, 'PC0434', '740899500273', 'ECOTREND', 'COMPATIBLE ', 'CASE DE TORRE COLOR NEGRO', '1969-12-31', '00', '00', 'JETWAYH61MDU3', 'CORI I3', '3.1 GHZ', '2GB', '250GB', NULL, NULL, 'REGISTRO NUEVO', NULL, NULL, 1, 2, 5, '2021-11-15 15:05:53');
+(1626, 1, 1, 29, 30, 114, 'PC0434', '740899500273', 'ECOTREND', 'COMPATIBLE ', 'CASE DE TORRE COLOR NEGRO', '1969-12-31', '00', '00', 'JETWAYH61MDU3', 'CORI I3', '3.1 GHZ', '2GB', '250GB', NULL, NULL, 'REGISTRO NUEVO', NULL, NULL, 1, 2, 5, '2021-11-15 15:05:53'),
+(1627, 3, 11, 35, 4, 17, 'BDMHE0D5Y9L4P9', '00442', 'HP', 'KU-1156', 'TECLADO CON PUERTO USB', '1969-12-31', '00', '00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'REGISTRO NUEVO', NULL, NULL, 1, 3, 4, '2021-11-26 11:06:22'),
+(1628, 3, 12, 31, 25, 86, '4B1520P00123', '462200500173', 'APC', 'BK650EI', 'BATERIA', '2019-12-31', 'NEA-171', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'REGISTRO NUEVO', NULL, NULL, 1, 1, 4, '2021-12-06 12:37:19');
 
 -- --------------------------------------------------------
 
@@ -2609,7 +2613,8 @@ INSERT INTO `ws_integraciones` (`idIntegracion`, `correlativo_integracion`, `nro
 (48, 'FT-2021-00048', '00', '', NULL, 0, 0, 0, NULL, 49, '2021-11-12', 3, 35, 4, 17, 1, 1, 0, '2021-11-12 17:21:03'),
 (49, 'FT-2021-00049', 'PRUEBA_4', '', 1625, 0, 0, 0, NULL, NULL, '2021-11-15', 1, 39, 24, 12, 1, 1, 0, '2021-11-15 14:29:41'),
 (50, 'FT-2021-00050', 'PC_0434', '', 1626, 0, 0, 0, NULL, NULL, '2021-11-15', 1, 29, 30, 114, 1, 2, 0, '2021-11-15 20:07:27'),
-(51, 'FT-2021-00051', 'PC_0718', '', 1404, 0, 0, 0, NULL, NULL, '2021-11-23', 1, 47, 19, 19, 1, 1, 0, '2021-11-23 13:33:31');
+(51, 'FT-2021-00051', 'PC_0718', '', 1404, 0, 0, 0, NULL, NULL, '2021-11-23', 1, 47, 19, 19, 1, 1, 0, '2021-11-23 13:33:31'),
+(52, 'FT-2021-00052', 'PC_1003_16EC', '', 1309, 0, 0, 0, NULL, NULL, '2021-12-03', 1, 35, 4, 17, 1, 1, 0, '2021-12-03 12:29:08');
 
 --
 -- Disparadores `ws_integraciones`
@@ -2791,7 +2796,14 @@ INSERT INTO `ws_mantenimientos` (`idMantenimiento`, `correlativo_Mant`, `fRegist
 (100, 'FM-2021-00100', '2021-11-15', 1, 1, 1626, 30, 114, 29, 'N° Equipo: PC_0434 || Serie N°: PC0434 || Cod.Patr: 740899500273 || Marca: ECOTREND || Modelo: COMPATIBLE  || Descripción: CASE DE TORRE COLOR NEGRO || IP:  || Procesador: CORI I3-3.1 GHZ || RAM: 2GB || Disco Duro: 250GB', 'El equipo no enciende', 9, 0, 0, 0, 0, 0, 0, 0, 5, '2021-11-15', 'La placa principal esta malograda', '2021-11-15', '2021-11-15', 2, 5, 29, 14, 15, 0, 0, 0, 0, 0, 'Se recomienda incrementar la memoria ram a 4gb para optimizar el rendimiento del equipo', 1, 1, 'NO', 'NO', '', 5, 1, 1, '2021-11-15 20:14:52'),
 (101, 'FM-2021-00101', '2021-11-23', 1, 1, 1404, 19, 19, 47, 'N° Equipo: PC_0718 || Serie N°: 558783 || Cod.Patr: 740899500773 || Marca: VASTEC || Modelo: KB-62 || Descripción: ESTACION DE TRABAJO || IP:  || Procesador: CORE i7 -3.2 GHZ || RAM: 8 GB || Disco Duro: 1 TB', 'PROBLEMAS CON EL SISTEMA OPERATIVO', 9, 0, 0, 0, 0, 0, 0, 0, 4, '2021-11-22', 'MANTENIMIENTO CORRECTIVO DEL SISTEMA OPERATIVO', '2021-11-22', '2021-11-23', 2, 4, 1, 13, 14, 15, 17, 16, 0, 0, 'se recomienda solicitar periódicamente su mantenimiento.', 1, 1, 'NO', 'NO', '', 4, 1, 1, '2021-11-23 13:37:18'),
 (102, 'FM-2021-00102', '2021-11-23', 1, 1, 1322, 4, 17, 35, 'N° Equipo: PC_0524 || Serie N°: MXL2500TFN || Cod.Patr: 740899500436 || Marca: HP || Modelo: HP ELITE 8300 SFF (50) || Descripción: ESTACION DE TRABAJO || IP:  || Procesador: CORE I7-3.4 GHZ || RAM: 4 GB || Disco Duro: 1 TB', 'EQUIPO SIN USO', 9, 0, 0, 0, 0, 0, 0, 0, 4, '2021-11-22', 'MANTENIMIENTO CORRECTIVO', '2021-11-22', '2021-11-23', 2, 4, 1, 13, 14, 15, 16, 0, 0, 0, 'SE RECOMIENDA SOLICITAR PERIODICAMENTE SU MANTENIMIENTO.', 1, 1, 'NO', 'NO', '', 4, 1, 1, '2021-11-23 14:05:06'),
-(103, 'FM-2021-00103', '2021-11-23', 10, 1, 571, 4, 17, 35, 'Serie N°: 6CM2480JTV || Cod.Patr: 740880370042 || Marca: HP || Modelo: LV2311 || Descripción: MONITOR LED 23 in', 'sin uso', 11, 0, 0, 0, 0, 0, 0, 0, 4, '2021-11-22', 'limpieza general', '2021-11-22', '2021-11-23', 1, 4, 6, 0, 0, 0, 0, 0, 0, 0, 'se entrega monitor en optimas condiciones.', 1, 1, 'NO', 'NO', '', 4, 3, 1, '2021-11-23 15:11:27');
+(103, 'FM-2021-00103', '2021-11-23', 10, 1, 571, 4, 17, 35, 'Serie N°: 6CM2480JTV || Cod.Patr: 740880370042 || Marca: HP || Modelo: LV2311 || Descripción: MONITOR LED 23 in', 'sin uso', 11, 0, 0, 0, 0, 0, 0, 0, 4, '2021-11-22', 'limpieza general', '2021-11-22', '2021-11-22', 1, 4, 6, 0, 0, 0, 0, 0, 0, 0, 'se entrega monitor en optimas condiciones.', 1, 1, 'NO', 'NO', '', 4, 3, 1, '2021-11-23 15:11:27'),
+(104, 'FM-2021-00104', '2021-11-26', 10, 1, 580, 4, 17, 35, 'Serie N°: 6CM3101X1P || Cod.Patr: 740880370110 || Marca: HP || Modelo: LV1911 || Descripción: MONITOR LED 18.5 in', 'MONITOR EN DESUSO', 11, 0, 0, 0, 0, 0, 0, 0, 4, '2021-11-26', 'REVISION  TECNICA Y LIMÑPIEZA GENERAL', '2021-11-26', '2021-11-26', 1, 4, 65, 6, 0, 0, 0, 0, 0, 0, 'EQUIPO EN BUENAS CONDICIONES. ', 1, 1, 'NO', 'NO', '', 4, 3, 1, '2021-11-26 16:01:50'),
+(105, 'FM-2021-00105', '2021-11-26', 11, 1, 1627, 4, 17, 35, 'Serie N°: BDMHE0D5Y9L4P9 || Cod.Patr: 00442 || Marca: HP || Modelo: KU-1156 || Descripción: TECLADO CON PUERTO USB', 'TECLAS DAÑADAS', 11, 0, 0, 0, 0, 0, 0, 0, 4, '2021-11-26', 'TECLAS INOPERATIVAS', '2021-11-26', '2021-11-26', 3, 4, 6, 65, 0, 0, 0, 0, 0, 0, 'SE REQUIERE LA ADQUISICION DE UN NUEVO TECLADO CON PUERTO USB', 1, 1, 'SI', 'NO', '', 4, 3, 1, '2021-11-26 16:09:09'),
+(106, 'FM-2021-00106', '2021-12-01', 3, 1, 196, 6, 29, 38, 'N° Equipo: null || Serie N°: GKK0023119 || Cod.Patr: 740845500208 || Marca: EPSON || Modelo: DFX-9000 || Descripción: MATRICIAL || IP: null', 'RODILLO PRESENTA DAÑO', 11, 0, 0, 0, 0, 0, 0, 0, 4, '2021-12-01', 'SE REQUIERE EL CAMBIO DE RODILLO', '2021-12-01', '2021-12-01', 1, 4, 65, 6, 0, 0, 0, 0, 0, 0, 'Se requiere la adquisición de un nuevo rodillo para su buen funcionamiento.', 1, 1, 'NO', 'NO', '', 4, 3, 1, '2021-12-01 19:56:58'),
+(107, 'FM-2021-00107', '2021-12-01', 3, 2, 193, 6, 29, 38, 'N° Equipo: null || Serie N°: GKK0026254 || Cod.Patr: 0 || Marca: EPSON || Modelo: DFX-9000 || Descripción: MATRICIAL || IP: null', 'impresora sin uso', 11, 0, 0, 0, 0, 0, 0, 0, 4, '2021-12-01', 'impresora malograda ', '2021-12-01', '2021-12-01', 3, 4, 41, 51, 0, 0, 0, 0, 0, 0, 'se requiere la adquisición  de un nuevo equipo.', 1, 2, 'NO', 'NO', '', 4, 3, 1, '2021-12-01 20:02:43'),
+(108, 'FM-2021-00108', '2021-12-01', 3, 2, 189, 6, 29, 38, 'N° Equipo: null || Serie N°: GKK0021705 || Cod.Patr: 0 || Marca: EPSON || Modelo: DFX-9000 || Descripción: MATRICIAL || IP: null', 'impresora sin uso', 11, 0, 0, 0, 0, 0, 0, 0, 4, '2021-12-01', 'impresora malograda ', '2021-12-01', '2021-12-01', 3, 4, 41, 47, 0, 0, 0, 0, 0, 0, 'se requiere la adquisición de un nuevo equipo.', 1, 2, 'NO', 'NO', '', 4, 3, 1, '2021-12-01 20:04:33'),
+(109, 'FM-2021-00109', '2021-12-03', 1, 1, 1309, 4, 17, 35, 'N° Equipo: PC_1003_16EC || Serie N°: MXL60211Y4 || Cod.Patr: 740899500737 || Marca: HP || Modelo: ELITE DESK 800 G1 SFF (117) || Descripción: ESTACION DE TRABAJO || IP:  || Procesador: CORE I7-3.6 GHZ || RAM: 8 GB || Disco Duro: 1 TB', 'Pc sin uso ', 9, 0, 0, 0, 0, 0, 0, 0, 4, '2021-12-02', 'mantenimiento correctivo ', '2021-12-02', '2021-12-03', 2, 4, 1, 13, 14, 15, 16, 0, 0, 0, 'se entrega equipo operativo.', 1, 1, 'NO', 'NO', '', 4, 1, 1, '2021-12-03 12:33:24'),
+(110, 'FM-2021-00110', '2021-12-06', 12, 2, 1628, 25, 86, 31, 'Serie N°: 4B1520P00123 || Cod.Patr: 462200500173 || Marca: APC || Modelo: BK650EI || Descripción: BATERIA', 'NO ENCIENDE', 11, 0, 0, 0, 0, 0, 0, 0, 4, '2021-12-06', 'UPC MALOGRADO', '2021-12-06', '2021-12-06', 3, 4, 6, 60, 0, 0, 0, 0, 0, 0, 'SE RECOMIENDA LA ADQUISICION DE UN ACUMULADOR DE ENERGIA O ESTABILIZADOR PARA EVITAR ALGUN DAÑO AL EQUIPO.', 1, 2, 'NO', 'NO', '', 4, 3, 1, '2021-12-06 17:41:30');
 
 --
 -- Disparadores `ws_mantenimientos`
@@ -3360,7 +3372,10 @@ INSERT INTO `ws_z_auditoria_mantenimientos` (`idAudMant`, `idDoc`, `usExec`, `ac
 (75, 88, 1, 'Anulación', '2021-11-15', '2021-11-15 14:34:10'),
 (76, 89, 1, 'Modificación', '2021-11-15', '2021-11-15 14:40:23'),
 (77, 90, 1, 'Modificación', '2021-11-15', '2021-11-15 14:45:20'),
-(78, 103, 4, 'Modificación', '2021-11-23', '2021-11-23 15:19:32');
+(78, 103, 4, 'Modificación', '2021-11-23', '2021-11-23 15:19:32'),
+(79, 103, 4, 'Modificación', '2021-11-26', '2021-11-26 15:17:28'),
+(80, 103, 4, 'Modificación', '2021-11-26', '2021-11-26 15:18:18'),
+(81, 110, 4, 'Modificación', '2021-12-06', '2021-12-06 17:49:25');
 
 -- --------------------------------------------------------
 
@@ -3530,7 +3545,7 @@ ALTER TABLE `ws_z_auditoria_reposiciones`
 -- AUTO_INCREMENT de la tabla `ws_acciones`
 --
 ALTER TABLE `ws_acciones`
-  MODIFY `idAccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `idAccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT de la tabla `ws_categorias`
@@ -3554,7 +3569,7 @@ ALTER TABLE `ws_diagnosticos`
 -- AUTO_INCREMENT de la tabla `ws_equipos`
 --
 ALTER TABLE `ws_equipos`
-  MODIFY `idEquipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1627;
+  MODIFY `idEquipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1629;
 
 --
 -- AUTO_INCREMENT de la tabla `ws_estado`
@@ -3584,13 +3599,13 @@ ALTER TABLE `ws_estadousuario`
 -- AUTO_INCREMENT de la tabla `ws_integraciones`
 --
 ALTER TABLE `ws_integraciones`
-  MODIFY `idIntegracion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `idIntegracion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `ws_mantenimientos`
 --
 ALTER TABLE `ws_mantenimientos`
-  MODIFY `idMantenimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `idMantenimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT de la tabla `ws_perfiles`
@@ -3644,7 +3659,7 @@ ALTER TABLE `ws_usuarios`
 -- AUTO_INCREMENT de la tabla `ws_z_auditoria_mantenimientos`
 --
 ALTER TABLE `ws_z_auditoria_mantenimientos`
-  MODIFY `idAudMant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `idAudMant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT de la tabla `ws_z_auditoria_reposiciones`
