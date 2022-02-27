@@ -58,6 +58,7 @@ $("#dniUsuario").keyup(function () {
     var u3 = $(this).val();
     var mu3 = u3.toUpperCase();
     $("#apellidoUsuarioMat").val(mu3);
+    
   });
   $("#edtapellidoUsuarioMat").keyup(function () {
     this.value = (this.value + "").replace(/[^a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]/g, "");
